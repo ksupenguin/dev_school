@@ -43,7 +43,7 @@ public class FirstSteps {
             mul = 0;
         } else {
             mul = 1;
-            for (int i = 0; i < array.length; i++) {
+            for (int i = 0; i < array.length; i++) { // IntStream have to be used
                 mul = mul * array[i];
             }
         }

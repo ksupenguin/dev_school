@@ -1,6 +1,9 @@
 package net.thumbtack.school.introduction;
 
+import java.util.stream.IntStream;
+
 public class FirstSteps {
+
     public int sum(int x, int y) {
         return x + y;
     }
@@ -30,31 +33,24 @@ public class FirstSteps {
     }
 
     public int sum(int[] array) {
-        int sum = 0;
-        for (int i = 0; i < array.length; i++) {
-            sum += array[i];
-        }
-        return sum;
+        return IntStream.of(array).sum();
     }
 
     public int mul(int[] array) {
-        int mul = 0;
+        int mul;
         if (array.length == 0) {
             mul = 0;
         } else {
-            mul = 1;
-            for (int i = 0; i < array.length; i++) { // IntStream have to be used
-                mul = mul * array[i];
-            }
+            mul = IntStream.of(array).reduce(1, (a, b) -> a * b);
         }
         return mul;
     }
 
     public int min(int[] array) {
         int min = Integer.MAX_VALUE;
-        for (int i : array) {
-            if (i < min) {
-                min = i;
+        for (int item : array) {
+            if (item < min) {
+                min = item;
             }
         }
         return min;
@@ -62,9 +58,9 @@ public class FirstSteps {
 
     public int max(int[] array) {
         int max = Integer.MIN_VALUE;
-        for (int i : array) {
-            if (i > max) {
-                max = i;
+        for (int item : array) {
+            if (item > max) {
+                max = item;
             }
         }
         return max;
@@ -94,8 +90,8 @@ public class FirstSteps {
     }
 
     public boolean find(int[] array, int value) {
-        for (int i : array) {
-            if (i == value) {
+        for (int item : array) {
+            if (item == value) {
                 return true;
             }
         }
@@ -103,7 +99,7 @@ public class FirstSteps {
     }
 
     public void reverse(int[] array) {
-        int temp = 0;
+        int temp;
         for (int i = 0; i < array.length / 2; i++) {
             temp = array[i];
             array[i] = array[array.length - i - 1];
@@ -122,21 +118,18 @@ public class FirstSteps {
 
     public int sum(int[][] matrix) {
         int sum = 0;
-        for (int i = 0; i < matrix.length; i++) {
-            for (int j = 0; j < matrix[i].length; j++) {
-                sum += matrix[i][j];
-            }
+        for (int[] row : matrix) {
+            sum += sum(row);
         }
         return sum;
     }
 
     public int max(int[][] matrix) {
         int max = Integer.MIN_VALUE;
-        for (int i = 0; i < matrix.length; i++) {
-            for (int j = 0; j < matrix[i].length; j++) {
-                if (matrix[i][j] > max) {
-                    max = matrix[i][j];
-                }
+        for (int[] row : matrix) {
+            int rowMax = max(row);
+            if (rowMax > max) {
+                max = rowMax;
             }
         }
         return max;
@@ -153,8 +146,8 @@ public class FirstSteps {
     }
 
     public boolean isSortedDescendant(int[][] matrix) {
-        for (int i = 0; i < matrix.length; i++) {
-            if (!isSortedDescendant(matrix[i])) {
+        for (int[] row : matrix) {
+            if (!isSortedDescendant(row)) {
                 return false;
             }
         }

@@ -1,8 +1,8 @@
 package net.thumbtack.school.figures.v1;
 
 public class Rectangle {
-    private Point2D topLeft;
-    private Point2D bottomRight;
+    protected Point2D topLeft;
+    protected Point2D bottomRight;
 
     /* 1 */
     public Rectangle(Point2D topLeft, Point2D bottomRight) {
